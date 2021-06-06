@@ -4,8 +4,7 @@ import { createAutocomplete } from './autocomplete.js';
 
 const movieDetailContainer = document.querySelector('#movie-detail');
 
-createAutocomplete({
-  root: document.querySelector('#movies-widget'),
+const autoCompleteConfig = {
   renderOption(movie) {
     const imgSrc =
       movie.Poster === 'N/A' ? 'assets/img/movie.png' : movie.Poster;
@@ -14,42 +13,35 @@ createAutocomplete({
       <h3>${movie.Title}</h3>&nbsp(${movie.Year})
     `;
   },
-  onOptionSelect(movie) {
-    onMovieSelect(movie);
-  },
   inputValue(movie) {
     return movie.Title;
   },
   fetchData(searchTerm) {
     return fetchMovies(searchTerm);
+  },
+};
+
+createAutocomplete({
+  ...autoCompleteConfig,
+  root: document.querySelector('#left-movie-widget'),
+  onOptionSelect(movie) {
+    onMovieSelect(movie, document.querySelector('#left-summary'));
   },
 });
 
 createAutocomplete({
-  root: document.querySelector('#movies-widget-two'),
-  renderOption(movie) {
-    const imgSrc =
-      movie.Poster === 'N/A' ? 'assets/img/movie.png' : movie.Poster;
-    return `
-      <img src="${imgSrc}" loading="lazy" />
-      <h3>${movie.Title}</h3>&nbsp(${movie.Year})
-    `;
-  },
+  ...autoCompleteConfig,
+  root: document.querySelector('#right-movie-widget'),
   onOptionSelect(movie) {
-    onMovieSelect(movie);
-  },
-  inputValue(movie) {
-    return movie.Title;
-  },
-  fetchData(searchTerm) {
-    return fetchMovies(searchTerm);
+    onMovieSelect(movie, document.querySelector('#right-summary'));
   },
 });
-const onMovieSelect = async (movie) => {
+
+const onMovieSelect = async (movie, summaryContainer) => {
   try {
     const movieDetail = await fetchMovie(movie.imdbID);
 
-    movieDetailContainer.innerHTML = movieTemplate(movieDetail);
+    summaryContainer.innerHTML = movieTemplate(movieDetail);
   } catch (error) {
     console.log(error);
   }

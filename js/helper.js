@@ -37,7 +37,7 @@ export const movieTemplate = (movieDetail) => {
 
   return `
     <div class="box">
-      <article class="media">
+      <article class="media" style="height: 250px">
         <figure class="media-left">
           <p class="image">
             <img src="${imgSrc}" loading="lazy" />
@@ -58,7 +58,7 @@ export const movieTemplate = (movieDetail) => {
       </div>
 
       <div class="notification is-primary">
-        <h4 class="title">BoxOffice</h4>
+        <h4 class="title">Box Office</h4>
         <p class="subtitle">${movieDetail.BoxOffice}</p>
       </div>
 
@@ -68,12 +68,12 @@ export const movieTemplate = (movieDetail) => {
       </div>
 
       <div class="notification is-primary">
-        <h4 class="title">imdbRating</h4>
+        <h4 class="title">IMDB Rating</h4>
         <p class="subtitle">${movieDetail.imdbRating}</p>
       </div>
 
       <div class="notification is-primary">
-        <h4 class="title">imdbVotes</h4>
+        <h4 class="title">IMDB Votes</h4>
         <p class="subtitle">${movieDetail.imdbVotes}</p>
       </div>
     </div>
