@@ -1,21 +1,5 @@
 import { debounce } from './utils.js';
-
-const apiKey = 'd6282249';
-const baseUrl = 'http://www.omdbapi.com';
-
-const fetchData = async (searchTerm) => {
-  try {
-    const response = await axios.get(`${baseUrl}`, {
-      params: {
-        apikey: apiKey,
-        s: searchTerm,
-      },
-    });
-    return response.data.Search;
-  } catch (error) {
-    console.log(error);
-  }
-};
+import { fetchData } from './requests.js';
 
 const movieWidget = document.querySelector('#movies-widget');
 
@@ -48,9 +32,10 @@ const handleInput = async (event) => {
   const movies = await fetchData(searchTerm);
 
   resultsWrapper.innerHTML = '';
-  dropdown.classList.add('is-active');
 
   if (movies) {
+    dropdown.classList.add('is-active');
+
     for (const movie of movies) {
       const movieItem = document.createElement('a');
       movieItem.classList.add('dropdown-item', 'dropdown-img');
@@ -66,6 +51,7 @@ const handleInput = async (event) => {
     }
   } else {
     console.log(`Movie ${searchTerm} not found`);
+    dropdown.classList.remove('is-active');
   }
 };
 
