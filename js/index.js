@@ -60,6 +60,28 @@ const onMovieSelect = async (movie, summaryContainer, side) => {
 
 const runComparison = () => {
   console.log("Let's Compare");
-  console.log({ leftMovie });
-  console.log({ rightMovie });
+
+  const leftSideStats = document.querySelectorAll(
+    '#left-summary .notification'
+  );
+
+  const rightSideStats = document.querySelectorAll(
+    '#right-summary .notification'
+  );
+
+  leftSideStats.forEach((leftStat, index) => {
+    const rightStat = rightSideStats[index];
+
+    const leftStatValue = parseFloat(leftStat.dataset.value);
+    const rightStatValue = parseFloat(rightStat.dataset.value);
+
+    if (leftStatValue > rightStatValue) {
+      console.log({ leftStat });
+      rightStat.classList.remove('is-primary');
+      rightStat.classList.add('is-warning');
+    } else {
+      leftStat.classList.remove('is-primary');
+      leftStat.classList.add('is-warning');
+    }
+  });
 };
