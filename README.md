@@ -1,8 +1,9 @@
 
-
 # Movies Comparison
 
 This project is a web-based application that allows users to compare movies. The comparison is based on various attributes retrieved from a movie database API. Users can search for movies using an autocomplete feature, select movies, and compare them side by side.
+
+**Live Demo**: [Movies Comparison](https://iheathers.github.io/movies-comparison-js/)
 
 ## Features
 - Autocomplete movie search.
@@ -30,7 +31,7 @@ movies-comparison-js-master/
 
 1. Clone the repository:
    ```bash
-   git clone <repo>
+   git clone https://github.com/iheathers/movies-comparison-js
    ```
 
 2. Open `index.html` in your browser.
